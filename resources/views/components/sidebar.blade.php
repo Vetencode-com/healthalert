@@ -41,7 +41,7 @@
     </div>
     <div class="sidebar-menu">
         <ul class="menu">
-            <li class="sidebar-title">{{ $title }}</li>
+            <x-sidebar.title :title="$title" />
             {{ $slot ?? '' }}
         </ul>
     </div>

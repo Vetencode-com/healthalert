@@ -26,12 +26,9 @@
             @include('layouts.partials.footer')
         </div>
     </div>
-    <script src="/assets/static/js/components/dark.js"></script>
-    <script src="/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-
-    @vite(['resources/js/app.js'])
-    {{-- <script src="assets/js/app.js" type="module"></script> --}}
-
+    
+    @vite(['resources/js/app.js', 'resources/js/components/dark.js'])
+    @vite(['resources/js/extensions/perfect-scrollbar.js'])
 </body>
 
 </html>
