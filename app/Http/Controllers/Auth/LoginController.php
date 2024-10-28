@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
 
 class LoginController extends Controller
@@ -23,15 +25,13 @@ class LoginController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $credentials = $request->validated();
+        $creds = $request->validated();
 
-        $attempt = Auth::attempt($credentials, $request->boolean('remember'));
+        $attempt = Auth::attempt($creds, $request->boolean('remember'));
 
         if (!$attempt) {
             return redirect()->back()->with('error', 'incorrect username or password');
         }
-        // $request->session()->invalidate();
-        // $request->session()->regenerateToken();
 
         return redirect()->to(RouteServiceProvider::HOME);
     }
@@ -39,7 +39,8 @@ class LoginController extends Controller
     /**
      * Destroy an authenticated session
      */
-    public function destroy(Request $request) {
+    public function destroy(Request $request)
+    {
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
