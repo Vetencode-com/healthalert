@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($doctors as $doctor) {
-            $last4 = substr($patient['phone'], -4);
+            $last4 = substr($doctor['phone'], -4);
             User::create([
                 'name' => $doctor['name'],
                 'phone' => $doctor['phone'],
