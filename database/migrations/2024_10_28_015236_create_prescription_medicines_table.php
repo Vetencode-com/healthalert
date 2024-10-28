@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('prescription_id')->constrained('prescriptions')->onDelete('cascade');
             $table->foreignId('medicine_id')->constrained('medicines')->onDelete('cascade');
-            $table->unsignedInteger('frequency_per_day')->default(1);
-            $table->time('end_time')->nullable(); // E.g., when reminders should stop
-            $table->unsignedInteger('duration_days')->nullable();
+            $table->unsignedInteger('frequency')->default(1)->comment('per day');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

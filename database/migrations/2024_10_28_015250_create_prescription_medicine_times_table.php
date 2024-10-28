@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('prescription_medicine_id')->constrained('prescription_medicines')->onDelete('cascade');
             $table->time('time');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
