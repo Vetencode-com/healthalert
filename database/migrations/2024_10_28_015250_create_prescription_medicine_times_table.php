@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('prescription_medicine_times', function (Blueprint $table) {
             $table->id();
             $table->foreignId('prescription_medicine_id')->constrained('prescription_medicines')->onDelete('cascade');
-            $table->time('time');
+            $table->time('time')->nullable();
+            $table->tinyInteger('order')->default(1);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

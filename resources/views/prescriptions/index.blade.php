@@ -55,7 +55,8 @@
     </div>
     
     @push('js')
-        @include('layouts.partials.datatable')
+        @vite(['resources/js/extensions/datatable.js'])
+        {{-- @include('layouts.partials.datatable') --}}
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 $('#test-table').DataTable(); 
