@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title }} - {{ config('app.name') }}</title>
+    <title>{{ $title ?? '' }} {{ '- ' . config('app.name') }}</title>
     @vite(['resources/sass/app.scss', 'resources/sass/themes/dark/app-dark.scss'])
     <link rel="shortcut icon" href="{{ asset('assets/static/images/logo/favicon.svg') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets/static/images/logo/favicon.png') }}" type="image/png">
+    @stack('css')
 </head>
 
 <body>
@@ -22,13 +23,16 @@
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-            {{ $slot }}
+            {{ $slot ?? '' }}
+            @yield('content')
             @include('layouts.partials.footer')
         </div>
     </div>
     
     @vite(['resources/js/app.js', 'resources/js/components/dark.js'])
-    @vite(['resources/js/extensions/perfect-scrollbar.js'])
+    @vite(['resources/js/extensions/perfect-scrollbar.js', 'resources/js/extensions/jquery.js'])
+
+    @stack('js')
 </body>
 
 </html>

@@ -1,0 +1,1 @@
+export default (objectName) => Object.keys(objectName).length === 0;

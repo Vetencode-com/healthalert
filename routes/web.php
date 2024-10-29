@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PrescriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,12 +18,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => 'auth', 'prefix' => '/'], function() {
-    Route::get('dashboard', function() {
+Route::prefix('/')->middleware(['auth'])->group(function () {
+    Route::get('dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::group(['prefix' => 'component', 'as' => 'component.'], function() {
-        Route::get('accordion', function() {
+
+    Route::prefix('prescriptions')->group(function () {
+        Route::get('/', [PrescriptionController::class, 'index'])->name('prescriptions');
+        Route::get('/new', [PrescriptionController::class, 'create'])->name('prescriptions.create');
+    });
+
+    Route::group(['prefix' => 'component', 'as' => 'component.'], function () {
+        Route::get('accordion', function () {
             return view('mazer.components.accordion');
         })->name('accordion');
     });
