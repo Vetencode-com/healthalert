@@ -21,10 +21,11 @@
             <div class="card shadow">
                 <div class="card-header d-flex justify-content-between">
                     <h4 class="card-title">Daftar Peresepan Obat</h4>
-                    <button class="btn btn-primary">
-                        <i class="bi bi-plus"></i> Tambah
-                    </button>
-
+                    <a href="{{ route('prescriptions.create') }}">
+                        <button class="btn btn-primary">
+                            <i class="bi bi-plus"></i> Tambah
+                        </button>
+                    </a>
                 </div>
                 <div class="card-body">
                     <table id="prescription-table" class="table table-striped">
