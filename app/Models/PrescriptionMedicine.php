@@ -16,6 +16,11 @@ class PrescriptionMedicine extends Model
         'frequency',
     ];
 
+    public function prescription()
+    {
+        return $this->belongsTo(Prescription::class);
+    }
+
     public function medicine()
     {
         return $this->belongsTo(Medicine::class);
