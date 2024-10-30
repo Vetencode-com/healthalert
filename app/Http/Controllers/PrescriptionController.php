@@ -12,7 +12,9 @@ class PrescriptionController extends Controller
 {
     public function index()
     {
-        return view('prescriptions.index');
+        $prescriptions = Prescription::with(['patient', 'medicines'])->get();
+        $data['prescriptions'] = $prescriptions;
+        return view('prescriptions.index', $data);
     }
 
     public function create()

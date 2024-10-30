@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? '' }} {{ '- ' . config('app.name') }}</title>
+    <title>{{ $title ?? '' }} - HealthAlert JKN</title>
     @vite(['resources/sass/app.scss', 'resources/sass/themes/dark/app-dark.scss'])
     <link rel="shortcut icon" href="{{ asset('assets/static/images/logo/favicon.svg') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets/static/images/logo/favicon.png') }}" type="image/png">
