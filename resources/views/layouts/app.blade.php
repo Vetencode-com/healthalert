@@ -7,8 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? '' }} - HealthAlert JKN</title>
     @vite(['resources/sass/app.scss', 'resources/sass/themes/dark/app-dark.scss'])
-    <link rel="shortcut icon" href="{{ asset('assets/static/images/logo/favicon.svg') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('assets/static/images/logo/favicon.png') }}" type="image/png">
+    {{-- <link rel="shortcut icon" href="{{ asset('assets/static/images/logo/favicon.svg') }}" type="image/x-icon"> --}}
+    {{-- <link rel="shortcut icon" href="{{ asset('assets/static/images/logo/favicon.png') }}" type="image/png"> --}}
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     @stack('css')
 </head>
