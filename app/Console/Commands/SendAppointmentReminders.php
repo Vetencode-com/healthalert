@@ -47,16 +47,17 @@ class SendAppointmentReminders extends Command
 
     private function sendRemindersForDate(Carbon $date)
     {
-        $appointments = Appointment::whereDate('datetime', $date->toDateString())
-            ->whereTime('datetime', '<=', $date->toTimeString())
+        $formattedDate = $date->format('Y-m-d H:i');
+
+        $appointments = Appointment::whereRaw("DATE_FORMAT(datetime, '%Y-%m-%d %H:%i') = ?", [$formattedDate])
             ->where('status', 'scheduled')
             ->get();
 
         foreach ($appointments as $appointment) {
-            // Send WhatsApp message here
             $this->sendWhatsAppMessage($appointment);
         }
     }
+
 
     private function sendWhatsAppMessage(Appointment $appointment)
     {
