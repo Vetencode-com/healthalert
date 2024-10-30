@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\PrescriptionController;
+use App\Http\Controllers\PrescriptionMedicineController;
+use App\Http\Controllers\WhatsAppController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,15 +18,35 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
-Route::group(['middleware' => 'auth', 'prefix' => '/'], function() {
-    Route::get('dashboard', function() {
+Route::prefix('/')->group(function () {
+    Route::get('dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::group(['prefix' => 'component', 'as' => 'component.'], function() {
-        Route::get('accordion', function() {
+
+    Route::prefix('prescriptions')->group(function () {
+        Route::get('/', [PrescriptionController::class, 'index'])->name('prescriptions');
+        Route::get('/new', [PrescriptionController::class, 'create'])->name('prescriptions.create');
+        Route::post('/', [PrescriptionController::class, 'store'])->name('prescriptions.store');
+        // Route::get('/medicines', [PrescriptionController::class, 'index'])->name('prescriptions');
+        Route::post('/medicines', [PrescriptionMedicineController::class, 'store'])->name('prescriptions.medicines.store');
+        Route::delete('/medicines/{id}', [PrescriptionMedicineController::class, 'delete'])->name('prescriptions.medicines.delete');
+        Route::patch('/medicines/frequency/{id}', [PrescriptionMedicineController::class, 'change_frequency'])->name('prescriptions.medicines.frequency.change');
+        Route::patch('/medicines/times/{id}', [PrescriptionMedicineController::class, 'change_time'])->name('prescriptions.medicines.times.change');
+    });
+
+    Route::prefix('appointments')->group(function () {
+        Route::get('/', [AppointmentController::class, 'index'])->name('appointments');
+        Route::get('/new', [AppointmentController::class, 'create'])->name('appointments.create');
+        Route::post('/', [AppointmentController::class, 'store'])->name('appointments.store');
+    });
+
+    Route::get('/whatsapp', [WhatsAppController::class, 'index'])->name('whatsapp');
+
+    Route::group(['prefix' => 'component', 'as' => 'component.'], function () {
+        Route::get('accordion', function () {
             return view('mazer.components.accordion');
         })->name('accordion');
     });

@@ -5,13 +5,18 @@ namespace App\Models;
 use App\Models\Traits\AbortNotFound;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Prescription extends Model
+class Appointment extends Model
 {
-    use HasFactory, AbortNotFound;
+    use HasFactory, SoftDeletes, AbortNotFound;
 
     protected $fillable = [
         'user_id',
+        'doctor_id',
+        'datetime',
+        'status',
+        'notes',
     ];
 
     public function patient()
@@ -19,8 +24,8 @@ class Prescription extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function medicines()
+    public function doctor()
     {
-        return $this->hasMany(PrescriptionMedicine::class);
+        return $this->belongsTo(User::class, 'doctor_id');
     }
 }
