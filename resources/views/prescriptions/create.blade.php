@@ -5,6 +5,38 @@
     @push('css')
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('assets/vendor/clockpicker/clockpicker.min.css') }}">
+        <style>
+            .select2-container .select2-selection--single {
+                height: calc(2.25rem + 2px); /* Matches Bootstrap's form-select height */
+                padding: 0.375rem 0.75rem; /* Matches padding of form-select */
+                font-size: 1rem; /* Matches font-size of form-select */
+                line-height: 1.5; /* Matches line-height of form-select */
+                border: 1px solid #ced4da; /* Matches border color of form-select */
+                border-radius: 0.25rem; /* Matches border-radius of form-select */
+                background-color: #fff; /* White background to match form-select */
+            }
+
+            .select2-container--default .select2-selection--single .select2-selection__rendered {
+                color: #495057; /* Matches text color of form-select */
+                padding-left: 0; /* Removes extra padding */
+            }
+
+            .select2-container--default .select2-selection--single .select2-selection__arrow {
+                height: calc(2.25rem + 2px); /* Matches height to center the arrow */
+                right: 0.75rem; /* Adjusts arrow position */
+            }
+
+            .select2-container--default .select2-selection--single {
+                box-shadow: none; /* Removes Select2's default shadow */
+            }
+
+            /* Additional styling to improve consistency with Bootstrap's focus effect */
+            .select2-container--default .select2-selection--single:focus {
+                border-color: #86b7fe;
+                outline: 0;
+                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* Matches form-select focus shadow */
+            }           
+        </style>
     @endpush
     <div class="page-heading">
         <div class="page-title">
@@ -32,7 +64,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="select-medicines" class="form-label mb-1 d-block">Obat</label>
-                                <select id="select-medicines" class="select2 form-select" data-url="{{ route('prescriptions.medicines.store') }}">
+                                <select id="select-medicines" class="select2 form-select" data-url="{{ route('prescriptions.medicines.store') }}" disabled>
                                     <option value="" disabled selected>Pilih obat</option>
                                     @foreach ($medicines as $medicine)
                                         <option value="{{ $medicine->id }}">{{ $medicine->name }}</option>
@@ -134,7 +166,10 @@
                             </div>
                         </div>
                         <div class="card-footer text-end">
-                            <button class="btn btn-primary" type="button" id="submit-prescription">Submit</button>
+                            <button class="btn btn-primary" type="button" id="submit-prescription">
+                                <div class="spinner-border spinner-border-sm d-none" role="status"></div>
+                                Submit
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -150,6 +185,8 @@
         let activeClockPicker = null;
         $(document).ready(function () {
             $('.select2').select2();
+
+            $('#select-patients').select2('open');
 
             function initClockPicker() {
                 $('.clockpicker').clockpicker({
@@ -174,6 +211,10 @@
             // Menangkap input mana yang menampilkan clockpicker
             $(document).on('focus', 'input.clockpicker', function() {
                 activeClockPicker = $(this);
+            });
+
+            $('#select-patients').change(function (e) {
+                $('#select-medicines').prop('disabled', false);
             });
 
             $('#select-medicines').change(function (e) {
@@ -282,17 +323,26 @@
             }
 
             $('#submit-prescription').click(function () {
+                $(this).prop('disabled', true);
+                $(this).find('.spinner-border').toggleClass('d-none');
                 $('.is-invalid').removeClass('is-invalid');
+
+                const activateBtn = () => {
+                    $(this).prop('disabled', false);
+                    $(this).find('.spinner-border').toggleClass('d-none');
+                }
 
                 const patient = $('#select-patients').val();
                 if (!patient) {
                     $('#select-patients').select2('open');
                     toastifyError('Pasien harus diisi');
+                    activateBtn();
                     return;
                 }
 
                 if (!$('#container-of-medicines .medicine-item').length) {
                     toastifyError('Belum ada obat yang disertakan');
+                    activateBtn();
                     return;
                 }
 
@@ -301,6 +351,7 @@
                     $(emptySelectFreq).addClass('is-invalid');
                     $(emptySelectFreq).focus();
                     toastifyError('Pilih dosis harian dari obat yang disertakan');
+                    activateBtn();
                     return;
                 }
                 
@@ -309,6 +360,7 @@
                     $(emptyInputTime).addClass('is-invalid');
                     $(emptyInputTime).focus();
                     toastifyError('Tentukan waktu untuk meminum obat');
+                    activateBtn();
                     return;
                 }
 
@@ -320,8 +372,12 @@
                     },
                     success: (resp) => {
                         window.location.href= back_url;
+                    },
+                    error: () => {
+                        activateBtn();
                     }
-                })
+                });
+
             });
 
         });

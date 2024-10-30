@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\PrescriptionMedicineController;
 use App\Http\Controllers\WhatsAppController;
@@ -34,6 +35,12 @@ Route::prefix('/')->group(function () {
         Route::delete('/medicines/{id}', [PrescriptionMedicineController::class, 'delete'])->name('prescriptions.medicines.delete');
         Route::patch('/medicines/frequency/{id}', [PrescriptionMedicineController::class, 'change_frequency'])->name('prescriptions.medicines.frequency.change');
         Route::patch('/medicines/times/{id}', [PrescriptionMedicineController::class, 'change_time'])->name('prescriptions.medicines.times.change');
+    });
+
+    Route::prefix('appointments')->group(function () {
+        Route::get('/', [AppointmentController::class, 'index'])->name('appointments');
+        Route::get('/new', [AppointmentController::class, 'create'])->name('appointments.create');
+        Route::post('/', [AppointmentController::class, 'store'])->name('appointments.store');
     });
 
     Route::get('/whatsapp', [WhatsAppController::class, 'index'])->name('whatsapp');
