@@ -41,7 +41,7 @@
                             @foreach ($appointments as $appointment)
                                 <tr>
                                     <td class="text-start">{{ $loop->iteration }}. </td>
-                                    <td>{{ date('d M Y, (H:i)', strtotime($appointment->created_at)) }}</td>
+                                    <td>{{ date('d M Y, (H:i)', strtotime($appointment->datetime)) }}</td>
                                     <td>{{ $appointment->patient->name }}</td>
                                     <td>{{ $appointment->doctor->name }}</td>
                                 </tr>

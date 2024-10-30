@@ -12,7 +12,7 @@ class PrescriptionController extends Controller
 {
     public function index()
     {
-        $prescriptions = Prescription::with(['patient', 'medicines'])->get();
+        $prescriptions = Prescription::with(['patient', 'medicines'])->orderBy('created_at', 'desc')->get();
         $data['prescriptions'] = $prescriptions;
         return view('prescriptions.index', $data);
     }
