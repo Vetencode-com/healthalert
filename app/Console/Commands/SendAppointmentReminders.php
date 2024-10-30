@@ -33,8 +33,8 @@ class SendAppointmentReminders extends Command
     {
         $now = Carbon::now();
         $datesToCheck = [
-            $now->copy()->addDays(3)->startOfDay(), // H-3
-            $now->copy()->addDays(2)->startOfDay(), // H-2
+            $now->copy()->addDays(3), // H-3
+            $now->copy()->addDays(1), // H-1
             $now, // Exact time
         ];
 
