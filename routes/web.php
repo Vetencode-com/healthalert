@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\PrescriptionMedicineController;
+use App\Http\Controllers\WhatsAppController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,8 @@ Route::prefix('/')->middleware(['auth'])->group(function () {
         Route::patch('/medicines/frequency/{id}', [PrescriptionMedicineController::class, 'change_frequency'])->name('prescriptions.medicines.frequency.change');
         Route::patch('/medicines/times/{id}', [PrescriptionMedicineController::class, 'change_time'])->name('prescriptions.medicines.times.change');
     });
+
+    Route::get('/whatsapp', [WhatsAppController::class, 'index'])->name('whatsapp');
 
     Route::group(['prefix' => 'component', 'as' => 'component.'], function () {
         Route::get('accordion', function () {
