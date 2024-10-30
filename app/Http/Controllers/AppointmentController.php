@@ -10,7 +10,7 @@ class AppointmentController extends Controller
 {
     public function index()
     {
-        $appointments = Appointment::with(['patient', 'doctor'])->get();
+        $appointments = Appointment::with(['patient', 'doctor'])->orderBy('created_at', 'desc')->get();
         $data['appointments'] = $appointments;
         return view('appointments.index', $data);
     }

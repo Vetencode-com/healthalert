@@ -70,7 +70,7 @@ class PrescriptionMedicineController extends Controller
                     $excessCount = $total_times - $frequency;
 
                     PrescriptionMedicineTime::where('prescription_medicine_id', $medicineItem->id)
-                        ->orderBy('created_at', 'desc')
+                        ->orderBy('id', 'desc')
                         ->take($excessCount)
                         ->delete();
                 }

@@ -14,7 +14,7 @@ class PrescriptionMedicineTime extends Model
         'prescription_medicine_id',
     ];
 
-    public function medicine_from_prescription()
+    public function prescriptionMedicine()
     {
         return $this->belongsTo(PrescriptionMedicine::class);
     }

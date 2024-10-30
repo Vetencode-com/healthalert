@@ -53,3 +53,5 @@ Route::prefix('/')->group(function () {
 });
 
 require_once __DIR__ . "/auth.php";
+
+Route::get('/test', [\App\Http\Controllers\DebugController::class, 'test']);
