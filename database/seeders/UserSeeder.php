@@ -18,11 +18,11 @@ class UserSeeder extends Seeder
     {
         // Create 5 sample patient users
         $patients = [
-            ['name' => 'Budi Santoso', 'phone' => '6281234567890', 'email' => 'budi@example.com'],
-            ['name' => 'Ayu Lestari', 'phone' => '6281234567891', 'email' => 'ayu@example.com'],
+            ['name' => 'Wildan M Zaki', 'phone' => '6289619925691', 'email' => 'budi@example.com'],
+            ['name' => 'Iqbal Rizan', 'phone' => '6281214495074', 'email' => 'ayu@example.com'],
             ['name' => 'Rina Kurnia', 'phone' => '6281234567892', 'email' => 'rina@example.com'],
             ['name' => 'Dedi Pratama', 'phone' => '6281234567893', 'email' => 'dedi@example.com'],
-            ['name' => 'Sari Utami', 'phone' => '6281234567894', 'email' => 'sari@example.com'],
+            ['name' => 'Haifa Rahma', 'phone' => '6289655463423', 'email' => 'sari@example.com'],
         ];
 
         foreach ($patients as $patient) {
@@ -38,8 +38,8 @@ class UserSeeder extends Seeder
 
         // Create 2 sample doctor users
         $doctors = [
-            ['name' => 'Dr. Wildan M Zaki', 'phone' => '6289619925691', 'email' => 'andi@example.com'],
-            ['name' => 'Dr. Sari', 'phone' => '6281234567896', 'email' => 'maya@example.com'],
+            ['name' => 'Dr. Hafidz Siregar', 'phone' => '6289619925692', 'email' => 'andi@example.com'],
+            ['name' => 'Dr. Sari Sulastri', 'phone' => '6281234567896', 'email' => 'maya@example.com'],
         ];
 
         foreach ($doctors as $doctor) {
