@@ -168,7 +168,7 @@
                         <div class="card-footer text-end">
                             <button class="btn btn-primary" type="button" id="submit-prescription">
                                 <div class="spinner-border spinner-border-sm d-none" role="status"></div>
-                                Submit
+                                Simpan
                             </button>
                         </div>
                     </div>
