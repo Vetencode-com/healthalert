@@ -2,8 +2,8 @@
 
 1. Clone this project
     ```bash
-    git clone https://github.com/billalxcode/laravel-mazer-starer laravel-mazer
-    cd laravel-mazer
+    git clone https://github.com/Vetencode-com/healthalert healthalert
+    cd healthalert
     ```
 2. Install dependencies
 
