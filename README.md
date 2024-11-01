@@ -12,7 +12,8 @@
     ```
 
 And javascript dependencies
-Note: Please run this step, because we use vite for managing asset
+
+*Note*: Please run this step, because we use vite for managing asset
 
     ```bash
     yarn install && yarn dev
