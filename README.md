@@ -11,8 +11,8 @@
     composer install
     ```
 
-    And javascript dependencies
-   Note: Please run this step, because we use vite for managing asset
+And javascript dependencies
+Note: Please run this step, because we use vite for managing asset
 
     ```bash
     yarn install && yarn dev
