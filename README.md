@@ -12,6 +12,7 @@
     ```
 
     And javascript dependencies
+   Note: Please run this step, because we use vite for managing asset
 
     ```bash
     yarn install && yarn dev
@@ -21,27 +22,24 @@
     npm install && npm run dev
     ```
 
-3. Set up Laravel configurations
+4. Set up Laravel configurations
 
     ```bash
     copy .env.example .env
     php artisan key:generate
     ```
 
-4. Set your database in .env
+5. Set your database in .env
 
-5. Migrate database
+6. Migrate database
 
     ```bash
     php artisan migrate --seed
     ```
 
-6. Serve the application
+7. Serve the application
 
     ```bash
     php artisan serve
     ```
 
-## Contributing
-
-Feel free to contribute and make a pull request.
